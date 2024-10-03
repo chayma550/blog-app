@@ -18,6 +18,6 @@ router.delete("/:id",verifyToken,deletePost)
 router.get("/:id",verifyToken,getPost)
 
 //get posts
-router.get("/",verifyToken,getPosts)
+router.get("/",getPosts)
 
 export default router
