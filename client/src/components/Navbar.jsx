@@ -12,14 +12,13 @@ const Navbar = () => {
   const [cats, setCats] = useState([]);
   const [open, setOpen] = useState(false);
 
-  // Retrieve token from local storage
 
   useEffect(() => {
     const getCats = async () => {
       try {
         const res = await apiRequest.get('/categories', {
           headers: {
-            Authorization: `Bearer ${currentUser.accessToken}`,  // Include the token in headers
+            Authorization: `Bearer ${currentUser.accessToken}`, 
           },
         });
         setCats(res.data);
@@ -33,7 +32,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await apiRequest.post('/auth/logout');
-      updateUser(null);  // Reset the user in the AuthContext
+      updateUser(null);  
       navigate('/');
     } catch (err) {
       console.log(err);

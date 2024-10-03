@@ -7,7 +7,6 @@ const Home = () => {
 
 const[posts,setPosts]=useState([]);
 const {search}=useLocation()
-const token = localStorage.getItem('accessToken');
 const { currentUser } = useContext(AuthContext);
 
 useEffect(()=>{
