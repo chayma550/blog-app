@@ -15,7 +15,7 @@ router.delete("/:id",verifyToken,deletePost)
 
 
 //get post
-router.get("/:id",verifyToken,getPost)
+router.get("/:id",getPost)
 
 //get posts
 router.get("/",getPosts)

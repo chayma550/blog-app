@@ -54,7 +54,6 @@ const Settings = () => {
       setError(err.response.data.message);
     }
   }
-  console.log(currentUser.accessToken)
   
 
   return (

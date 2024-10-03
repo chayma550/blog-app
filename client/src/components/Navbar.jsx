@@ -17,9 +17,7 @@ const Navbar = () => {
     const getCats = async () => {
       try {
         const res = await apiRequest.get('/categories', {
-          headers: {
-            Authorization: `Bearer ${currentUser.accessToken}`, 
-          },
+         
         });
         setCats(res.data);
       } catch (error) {

@@ -13,9 +13,7 @@ useEffect(()=>{
   const fetchPosts=async()=>{
     try{
       const res=await apiRequest.get("/posts"+search,{
-        headers: {
-          Authorization: `Bearer ${currentUser.accessToken}`,  // Include the token in headers
-        },
+        
       })
      
       setPosts(res.data)
