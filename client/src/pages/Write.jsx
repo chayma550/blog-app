@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import apiRequest from '../lib/apiRequest';
-import {  useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 
 const Write = () => {
@@ -37,14 +37,23 @@ const Write = () => {
         return;
       }
     }
+
     try {
-      await apiRequest.post(`/posts/`, {
-        title,
-        desc: value,
-        img: file ? imgUrl : "",
-        username: currentUser.username,
-        categories: cat ? [cat] : [] 
-      });
+      await apiRequest.post(
+        `/posts/`,
+        {
+          title,
+          desc: value,
+          img: file ? imgUrl : "",
+          username: currentUser.username,
+          categories: cat ? [cat] : []
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${currentUser.accessToken}` // Add token in headers
+          }
+        }
+      );
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -69,7 +78,7 @@ const Write = () => {
           <span>
             <b>Visibility:</b> Public
           </span>
-          <input type="file" id="file" name="" onChange={(e) => setFile(e.target.files[0])} />
+          <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
           <label htmlFor="file">Upload Image</label>
           <div className="buttons">
             <button>Save as a draft</button>

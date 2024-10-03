@@ -25,7 +25,7 @@ const Settings = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     let imgUrl = "";
     if (file) {
       imgUrl = await upload(file);
@@ -34,16 +34,20 @@ const Settings = () => {
         return;
       }
     }
-
+  
     const formData = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(formData);
-
+  
     try {
       const res = await apiRequest.put(`/users/${currentUser._id}`, {
         username,
         email,
         password,
         profilePic: file ? imgUrl : currentUser.profilePic, // Use the current profilePic if no file uploaded
+      }, {
+        headers: {
+          Authorization: `Bearer ${currentUser.accessToken}` // Assuming your JWT token is stored in currentUser.accessToken
+        }
       });
       updateUser(res.data);
       navigate("/");
@@ -51,6 +55,7 @@ const Settings = () => {
       setError(err.response.data.message);
     }
   }
+  
 
   return (
     <div className='settings'>
@@ -74,7 +79,7 @@ const Settings = () => {
               type="file"
               className="settingsPPInput"
               style={{ display: "none" }}
-              onChange={(e) => setFile(e.target.files[0])} // Update the file state on change
+              onChange={(e) => setFile(e.target.files[0])} 
             />
           </div>
           <label>Username</label>
