@@ -73,7 +73,6 @@ const handleSubmit=async(e)=>{
             <input
               id="fileInput"
               type="file"
-              style={{ display: "none" }}
               className="settingsPPInput"
               onChange={(e) => setFile(e.target.files[0])}
 
