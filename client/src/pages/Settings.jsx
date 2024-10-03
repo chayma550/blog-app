@@ -42,11 +42,10 @@ const Settings = () => {
       const res = await apiRequest.put(`/users/${currentUser._id}`, {
         username,
         email,
-        password,
-        profilePic: file ? imgUrl : currentUser.profilePic, // Use the current profilePic if no file uploaded
+        password,// Use the current profilePic if no file uploaded
       }, {
         headers: {
-          Authorization: `Bearer ${currentUser.accessToken}` // Assuming your JWT token is stored in currentUser.accessToken
+          Authorization: `Bearer ${currentUser.accessToken}` 
         }
       });
       updateUser(res.data);

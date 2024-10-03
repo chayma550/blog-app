@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import DOMPurify from 'dompurify';
 import apiRequest from '../lib/apiRequest';
+import { AuthContext } from '../context/AuthContext';
 const Home = () => {
 
 const[posts,setPosts]=useState([]);
 const {search}=useLocation()
 const token = localStorage.getItem('accessToken');
+const { currentUser } = useContext(AuthContext);
 
 useEffect(()=>{
   const fetchPosts=async()=>{
     try{
       const res=await apiRequest.get("/posts"+search,{
         headers: {
-          Authorization: `Bearer ${token}`,  // Include the token in headers
+          Authorization: `Bearer ${currentUser.accessToken}`,  // Include the token in headers
         },
       })
      

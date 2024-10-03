@@ -13,14 +13,13 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   // Retrieve token from local storage
-  const token = localStorage.getItem('accessToken');
 
   useEffect(() => {
     const getCats = async () => {
       try {
         const res = await apiRequest.get('/categories', {
           headers: {
-            Authorization: `Bearer ${token}`,  // Include the token in headers
+            Authorization: `Bearer ${currentUser.accessToken}`,  // Include the token in headers
           },
         });
         setCats(res.data);
