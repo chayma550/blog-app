@@ -4,12 +4,12 @@ import { addCategory,  getCategorys } from "../controllers/Category.js";
 const router = express.Router();
 
 //add category
-router.post("/",verifyToken,addCategory)
+router.post("/",addCategory)
 
 
 
 //get category
-router.get("/",verifyToken,getCategorys)
+router.get("/",getCategorys)
 
 
 
