@@ -6,14 +6,27 @@ const Home = () => {
 
 const[posts,setPosts]=useState([]);
 const {search}=useLocation()
+const token = localStorage.getItem('accessToken');
+
 useEffect(()=>{
   const fetchPosts=async()=>{
-    const res=await apiRequest.get("/posts"+search)
-    setPosts(res.data)
-  }
+    try{
+      const res=await apiRequest.get("/posts"+search,{
+        headers: {
+          Authorization: `Bearer ${token}`,  // Include the token in headers
+        },
+      })
+     
+      setPosts(res.data)
+    }catch(error){
+      console.log('Error fetching posts:', error);
+
+    }
+    }
+   
   
   fetchPosts()
-},[search])
+},[search,token])
 
 
 
