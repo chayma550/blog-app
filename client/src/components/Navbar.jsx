@@ -25,7 +25,7 @@ const Navbar = () => {
       }
     };
     getCats();
-  }, [currentUser.accessToken]);
+  }, []);
 
   const handleLogout = async () => {
     try {
