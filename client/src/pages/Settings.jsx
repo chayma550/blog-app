@@ -10,6 +10,7 @@ const Settings = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
 
+
   const upload = async (file) => {
     const data = new FormData();
     data.append("file", file);
@@ -42,7 +43,8 @@ const Settings = () => {
       const res = await apiRequest.put(`/users/${currentUser._id}`, {
         username,
         email,
-        password,// Use the current profilePic if no file uploaded
+        password,
+        profilePic:file?imgUrl:"",
       }, {
         headers: {
           Authorization: `Bearer ${currentUser.accessToken}` 
