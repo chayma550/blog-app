@@ -28,7 +28,7 @@ useEffect(()=>{
    
   
   fetchPosts()
-},[search,token])
+},[search,[currentUser.accessToken]])
 
 
 
